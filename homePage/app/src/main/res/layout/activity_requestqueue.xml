@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/flowersdrops"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/tvurl"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:layout_margin="20dp"
+        android:background="#fff"
+        android:hint="Enter URL" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/tvkeys"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:layout_margin="20dp"
+        android:background="#fff"
+        android:hint="No of parts"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn"
+        android:text="Send Request"
+        android:textSize="20sp"
+        android:background="@color/colorPrimary"
+        android:textColor="#fff"
+        android:layout_margin="20dp"/>
+</LinearLayout>

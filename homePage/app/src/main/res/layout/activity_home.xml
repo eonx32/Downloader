@@ -9,64 +9,58 @@
     android:padding="10dp"
     android:background="@drawable/flowersdrops">
 
-    <LinearLayout
-        android:clipToPadding="false"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_add_to_queue_black_24dp"
         android:padding="10dp"
-        android:orientation="vertical">
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/ic_important_devices_black_24dp"
-                android:padding="10dp"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:text="New Request"
-                android:id="@+id/b1"
-                android:onClick="onButtonClick"/>
-    </LinearLayout>
+        android:layout_gravity="center"
+        android:id="@+id/img1"/>
 
-    <LinearLayout
-        android:clipToPadding="false"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp">
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/ic_folder_black_24dp"
-            android:padding="10dp"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:text="Manage Files"/>
-    </LinearLayout>
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:text="New Request"
+        android:layout_gravity="center"
+        android:id="@+id/button1"
+        />
 
-    <LinearLayout
-        android:clipToPadding="false"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/ic_history_black_24dp"
-            android:padding="10dp"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:text="History"/>
-    </LinearLayout>
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_folder_black_24dp"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        android:id="@+id/img2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:text="Manage Queue"
+        android:layout_gravity="center"
+        android:id="@+id/button2"/>
+
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_history_black_24dp"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        android:id="@+id/img3"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:text="History"
+        android:layout_gravity="center"
+        android:id="@+id/button3"/>
+
 </LinearLayout>
