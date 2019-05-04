@@ -1,45 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RequestActivity"
+    tools:context="com.example.Downloader.activity.RequestActivity"
     android:orientation="vertical"
-    android:padding="20dp"
+    android:padding="5dp"
     android:background="@drawable/flowersdrops">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
 
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/ic_queue_black_24dp"
-        android:padding="10dp"
-        android:layout_gravity="center"/>
+        <android.support.v4.widget.ContentLoadingProgressBar
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:visibility="gone"
+            android:id="@+id/progressbar"/>
 
-    <Button
-        android:layout_width="wrap_content"
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:text="Add to queue"
-        android:layout_gravity="center"
-        android:id="@+id/bAddq"/>
+        android:paddingBottom="5dp"
+        android:id="@+id/textLayout1"
+        android:layout_alignParentTop="true">
 
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/ic_file_download_black_24dp"
-        android:padding="10dp"
-        android:layout_gravity="center"/>
+        <android.support.v7.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:maxLines="1"
+            android:inputType="text"
+            android:hint="Enter url"
+            android:id="@+id/address"
+            android:background="@color/colorPrimary"/>
 
-    <Button
-        android:layout_width="wrap_content"
+    </LinearLayout>
+
+    <View style="@style/Divider"
+        android:id="@+id/divider1"
+        android:layout_below="@id/textLayout1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:text="Download"
-        android:layout_gravity="center"
-        android:id="@+id/bDown"/>
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:id="@+id/textLayout2"
+        android:layout_below="@+id/divider1">
 
-</LinearLayout>
+        <android.support.v7.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:maxLines="1"
+            android:inputType="text"
+            android:hint="Enter name"
+            android:id="@+id/name"
+            android:background="@color/colorPrimary"/>
+
+    </LinearLayout>
+
+    <View style="@style/Divider"
+        android:id="@+id/divider2"
+        android:layout_below="@id/textLayout2"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:id="@+id/spinnerLayout"
+        android:layout_below="@+id/divider2"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="30dp"
+            android:text="Parts : "
+            android:textAllCaps="false"
+            android:background="@color/colorPrimary"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:textSize="30dp"
+            android:entries="@array/array_parts"
+            android:id="@+id/parts"
+            android:background="@color/lightgray"/>
+
+    </LinearLayout>
+
+    <View style="@style/Divider"
+        android:id="@+id/divider3"
+        android:layout_below="@+id/spinnerLayout"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textSize="30dp"
+        android:text="Submit"
+        android:onClick="sendRequest"
+        android:background="@color/colorPrimary"/>
+
+
+</RelativeLayout>

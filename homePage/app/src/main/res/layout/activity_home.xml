@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home"
+    tools:context=".activity.HomeActivity"
     android:orientation="vertical"
     android:padding="10dp"
     android:background="@drawable/flowersdrops">
@@ -18,14 +18,14 @@
         android:id="@+id/img1"/>
 
     <Button
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:text="New Request"
         android:layout_gravity="center"
-        android:id="@+id/button1"
-        />
+        android:layout_marginTop="10dp"
+        android:onClick="request"
+        android:text="New Request"
+        android:textStyle="bold" />
 
 
     <ImageView
@@ -60,6 +60,7 @@
         android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:text="History"
+        android:onClick="history"
         android:layout_gravity="center"
         android:id="@+id/button3"/>
 
