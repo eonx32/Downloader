@@ -34,7 +34,9 @@ public class FilePartAdapter extends RecyclerView.Adapter<FilePartAdapter.ItemHo
     public void onBindViewHolder(ItemHolder holder, final int position) {
         final FilePart filePart = fileParts.get(position);
 
-        holder.partName.setText("Part-"+filePart.getId());
+        if(filePart.getId() != 0)
+            holder.partName.setText("Part-"+filePart.getId());
+        else holder.partName.setText(filePart.getLink());
 
         holder.partName.setOnClickListener(view -> mItemClickListener.onItemClick(position, filePart));
         if(filePart.isAvailable())

@@ -3,8 +3,9 @@
     package="com.example.Downloader">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
-    <application
+<application
         android:allowBackup="true"
         android:name="com.example.Downloader.app.DownloaderApplication"
         android:usesCleartextTraffic="true"
@@ -23,6 +24,15 @@
         <activity android:name="com.example.Downloader.activity.RequestActivity" />
         <activity android:name="com.example.Downloader.activity.HistoryActivity" />
         <activity android:name="com.example.Downloader.activity.FileActivity"></activity>
+    <provider
+        android:name="android.support.v4.content.FileProvider"
+        android:authorities="com.example.Downloader.fileprovider"
+        android:exported="false"
+        android:grantUriPermissions="true">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/provider_paths"/>
+    </provider>
     </application>
 
 </manifest>

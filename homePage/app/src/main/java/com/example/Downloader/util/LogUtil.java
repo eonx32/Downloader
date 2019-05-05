@@ -4,6 +4,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.Downloader.app.DownloaderApplication;
+import com.example.Downloader.data.FilePart;
 
 public class LogUtil {
 
