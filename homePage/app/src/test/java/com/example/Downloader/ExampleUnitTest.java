@@ -1,4 +1,4 @@
-package com.example.homepage;
+package com.example.FileDownloader;
 
 import org.junit.Test;
 

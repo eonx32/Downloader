@@ -11,8 +11,11 @@ import android.widget.Spinner;
 
 import com.example.Downloader.R;
 import com.example.Downloader.data.File;
+import com.example.Downloader.data.Response;
 import com.example.Downloader.helper.DownloaderClient;
 import com.example.Downloader.helper.DownloaderClientListener;
+import com.example.Downloader.util.FileORM;
+import com.example.Downloader.util.FileUtil;
 import com.example.Downloader.util.LogUtil;
 
 import java.util.Objects;
@@ -55,7 +58,7 @@ public class RequestActivity extends AppCompatActivity implements DownloaderClie
             progressBar.hide();
         else {
             progressBar.show();
-            downloaderClient.requestDownload(address, name, parts);
+            downloaderClient.requestDownload(address, parts);
         }
     }
 
@@ -75,10 +78,15 @@ public class RequestActivity extends AppCompatActivity implements DownloaderClie
     }
 
     @Override
-    public void updateFileInfo(@Nullable File file) {
+    public void updateFileInfo(@Nullable Response response) {
+
+        LogUtil.warn(TAG, "updateFileInfo");
+
         progressBar.hide();
 
-        if(Objects.nonNull(file)) {
+        if(Objects.nonNull(response)) {
+            File file = FileUtil.getFileFromResponse(response, nameText.getText().toString());
+            FileORM.saveFile(file);
             finish();
             startActivity(new Intent(this, HistoryActivity.class));
         } else {

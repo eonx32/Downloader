@@ -1,12 +1,21 @@
 package com.example.Downloader.data;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
-public class File implements Serializable {
+public class File implements Serializable{
 
+    @SerializedName("id")
     private long id;
+
+    @SerializedName("name")
     private String name;
+
+    @SerializedName("ext")
     private String ext;
+
+    @SerializedName("parts")
     private int parts;
 
     public File(long id, String name, String ext, int parts) {

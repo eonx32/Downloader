@@ -1,17 +1,14 @@
 package com.example.Downloader.activity;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.Downloader.data.File;
 import com.example.Downloader.util.LogUtil;
 import com.example.Downloader.R;
-
-import static com.example.Downloader.helper.FileDBHelper.FILE_COLUMN_EXT;
-import static com.example.Downloader.helper.FileDBHelper.FILE_COLUMN_ID;
-import static com.example.Downloader.helper.FileDBHelper.FILE_COLUMN_NAME;
-import static com.example.Downloader.helper.FileDBHelper.FILE_COLUMN_PARTS;
+import com.google.gson.Gson;
 
 public class FileActivity extends AppCompatActivity {
 
@@ -24,15 +21,12 @@ public class FileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file);
 
-        Intent intent = getIntent();
+        file = new Gson().fromJson(getIntent().getStringExtra("file"), File.class);
+        LogUtil.warn(TAG, file.toString());
 
-        file = new File(
-                intent.getLongExtra(FILE_COLUMN_ID, 0),
-                intent.getStringExtra(FILE_COLUMN_NAME),
-                intent.getStringExtra(FILE_COLUMN_EXT),
-                intent.getIntExtra(FILE_COLUMN_PARTS, 0)
-        );
-
-        LogUtil.error(TAG, file.toString());
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(file.getName()+"."+file.getExt());
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(true);
     }
 }

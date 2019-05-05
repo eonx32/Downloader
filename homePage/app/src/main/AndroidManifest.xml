@@ -6,7 +6,7 @@
 
     <application
         android:allowBackup="true"
-        android:name="com.example.Downloader.DownloaderApplication"
+        android:name="com.example.Downloader.app.DownloaderApplication"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="homepage"

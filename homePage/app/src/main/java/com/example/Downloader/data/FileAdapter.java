@@ -1,69 +1,70 @@
 package com.example.Downloader.data;
 
-import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.Downloader.R;
 
 import java.util.List;
 
-public class FileAdapter extends ArrayAdapter<File> {
+public class FileAdapter extends RecyclerView.Adapter<FileAdapter.ItemHolder> {
 
-    private LayoutInflater inflater;
     private List<File> files;
+    private OnItemClickListener mItemClickListener;
 
-    public FileAdapter(Context context, int resource, List<File> files) {
-        super(context, resource, files);
-        inflater = LayoutInflater.from(context);
+    public FileAdapter(List<File> files, OnItemClickListener mItemClickListener) {
         this.files = files;
+        this.mItemClickListener = mItemClickListener;
     }
 
     @Override
-    public int getCount() {
-        return files.size(); //returns total of items in the list
+    public ItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.file_item_layout, parent, false);
+        return new ItemHolder(v);
     }
 
     @Override
-    public File getItem(int position) {
-        return files.get(position); //returns list item at the specified position
+    public void onBindViewHolder(ItemHolder holder, final int position) {
+        final File file = files.get(position);
+
+        holder.name.setText(file.getName()+"."+file.getExt());
+        holder.parts.setText(String.valueOf(file.getParts()));
+        holder.name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mItemClickListener.onItemClick(position, file);
+            }
+        });
+        holder.parts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mItemClickListener.onItemClick(position, file);
+            }
+        });
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public int getItemCount() {
+        return files.size();
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
+    public class ItemHolder extends RecyclerView.ViewHolder {
 
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.file_item_layout,
-                    parent, false);
-            viewHolder = new ViewHolder(convertView);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
-
-        File file = getItem(position);
-        viewHolder.name.setText(file.getName()+"."+file.getExt());
-        viewHolder.parts.setText(file.getParts());
-
-        return convertView;
-    }
-
-    private class ViewHolder {
         TextView name;
         TextView parts;
 
-        public ViewHolder(View view) {
-            name = (TextView)view.findViewById(R.id.name);
-            parts = (TextView) view.findViewById(R.id.parts);
+        public ItemHolder(View itemView) {
+            super(itemView);
+            name = itemView.findViewById(R.id.name);
+            parts = itemView.findViewById(R.id.parts);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position, File file);
     }
 }

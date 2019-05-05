@@ -3,7 +3,7 @@ package com.example.Downloader.util;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.Downloader.DownloaderApplication;
+import com.example.Downloader.app.DownloaderApplication;
 
 public class LogUtil {
 

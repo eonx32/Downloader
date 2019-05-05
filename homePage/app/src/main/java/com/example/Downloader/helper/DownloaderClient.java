@@ -1,25 +1,20 @@
 package com.example.Downloader.helper;
 
 import android.content.Context;
+import android.util.Log;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.Downloader.DownloaderApplication;
-import com.example.Downloader.data.File;
+import com.example.Downloader.app.DownloaderApplication;
+import com.example.Downloader.client.ApiClient;
+import com.example.Downloader.client.QueryApiInterface;
+import com.example.Downloader.data.Response;
 import com.example.Downloader.util.LogUtil;
 
-import org.json.JSONException;
-
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.example.Downloader.util.Constants.DOWNLOAD_URL;
-import static com.example.Downloader.util.FileUtil.getFileFromJSON;
+import retrofit2.Call;
 
 public class DownloaderClient {
 
@@ -28,7 +23,6 @@ public class DownloaderClient {
     private static DownloaderClient mInstance;
     private DownloaderClientListener listener;
     private Context context;
-    private RequestQueue mRequestQueue;
 
     private DownloaderClient(Context context) {
         this.context = context;
@@ -54,64 +48,38 @@ public class DownloaderClient {
         this.listener = listener;
     }
 
-    public RequestQueue getRequestQueue() {
-        if (Objects.isNull(mRequestQueue)) {
-            mRequestQueue = Volley.newRequestQueue(context);
-        }
-        return mRequestQueue;
-    }
+    public void requestDownload(final String url, int parts) {
 
-    public void requestDownload(final String url,
-                                final String name, final int parts) {
-        StringRequest request
-                = new StringRequest(
-                Request.Method.POST,
-                DOWNLOAD_URL,
-                new Response.Listener<String>() {
+        Map<String, String> queries = new HashMap<String, String>();
+        queries.put("url", url);
+        queries.put("parts",String.valueOf(parts));
 
-                    @Override
-                    public void onResponse(String response) {
-                        LogUtil.info(TAG, response);
-                        try {
-                            File file = getFileFromJSON(response, name);
-                            listener.updateFileInfo(file);
-                            LogUtil.error(TAG, "Success");
-                            return ;
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        } finally {
-                            LogUtil.error(TAG, "Exception");
-                            listener.updateFileInfo(null);
-                        }
+        QueryApiInterface queryApiInterface = ApiClient.getApiClient().create(QueryApiInterface.class);
+        Call<Response> call = queryApiInterface.getResult(queries);
+        call.enqueue(new retrofit2.Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                LogUtil.warn(TAG, response.body().toString());
+                if(response.code() == 200) {
+                    if(Objects.nonNull(listener))
+                        listener.updateFileInfo(response.body());
+                } else {
+                    try {
+                        LogUtil.error(TAG, "Error : "+response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                },
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        LogUtil.error(TAG, "Error: "
-                                + error.getMessage());
-                        LogUtil.error(TAG, "Failure");
+                    if(Objects.nonNull(listener))
                         listener.updateFileInfo(null);
-                    }
-                }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap();
-                params.put("url", url);
-                params.put("parts", String.valueOf(parts));
-
-                return params;
+                }
             }
 
             @Override
-            public String getBodyContentType() {
-                return "application/x-www-form-urlencoded; charset=UTF-8";
+            public void onFailure(Call<Response> call, Throwable t) {
+                if(Objects.nonNull(listener))
+                    listener.updateFileInfo(null);
+                LogUtil.error(TAG, "Server Error : "+t.getMessage());
             }
-        };
-
-        getRequestQueue().add(request);
+        });
     }
 }
