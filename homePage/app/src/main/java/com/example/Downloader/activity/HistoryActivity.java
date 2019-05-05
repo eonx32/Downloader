@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.Downloader.data.File;
-import com.example.Downloader.data.FileAdapter;
+import com.example.Downloader.view.FileAdapter;
 import com.example.Downloader.R;
 import com.example.Downloader.util.FileORM;
 import com.google.gson.Gson;

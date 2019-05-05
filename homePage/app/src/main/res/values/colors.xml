@@ -8,6 +8,6 @@
     <color name="blue">#00b2ff</color>
     <color name="yellow">#f7ffff00</color>
     <color name="green">#cc95af10</color>
-    <color name="boldgreen">#3765ed</color>
+    <color name="darkBlue">#3765ed</color>
     <color name="colorAccent">#FF4081</color>
 </resources>
