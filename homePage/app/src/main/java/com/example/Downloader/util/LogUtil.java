@@ -19,7 +19,7 @@ public class LogUtil {
         Log.w(TAG, message);
     }
 
-    public static void showShowToast(String message) {
+    public static void showShortToast(String message) {
         Toast.makeText(DownloaderApplication.getInstance(), message, Toast.LENGTH_SHORT).show();
     }
 

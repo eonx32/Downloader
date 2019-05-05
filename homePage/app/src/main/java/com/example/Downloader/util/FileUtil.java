@@ -46,10 +46,10 @@ public class FileUtil {
             String address = String.join(
                     SEPARATOR,
                     String.valueOf(file.getId()),
-                    file.getName(),
+                    file.getExt(),
                     FILE_SUFFIX[i]
             );
-            FilePart filePart = new FilePart(address, i+1, searchFileInStorage(address));
+            FilePart filePart = new FilePart(address, i+1, searchFileInStorage(address+"."+file.getExt()));
             fileParts.add(filePart);
             LogUtil.warn(TAG, filePart.toString());
         }
@@ -59,7 +59,7 @@ public class FileUtil {
 
     private static boolean searchFileInStorage(String address) {
 
-        java.io.File file = new java.io.File(DownloaderApplication.getInstance().getFilesDir(),
+        java.io.File file = new java.io.File(DownloaderApplication.getInstance().getExternalFilesDir(null),
                 address);
         return file.exists();
     }

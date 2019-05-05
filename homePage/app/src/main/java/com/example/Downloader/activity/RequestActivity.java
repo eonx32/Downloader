@@ -90,7 +90,7 @@ public class RequestActivity extends AppCompatActivity implements DownloaderClie
             finish();
             startActivity(new Intent(this, HistoryActivity.class));
         } else {
-            LogUtil.showLongToast("Network Error!!\nPlease try later!!");
+            LogUtil.showShortToast("Network Error!!\nPlease try later!!");
         }
     }
 
