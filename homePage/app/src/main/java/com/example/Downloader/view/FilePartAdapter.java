@@ -37,6 +37,8 @@ public class FilePartAdapter extends RecyclerView.Adapter<FilePartAdapter.ItemHo
         holder.partName.setText("Part-"+filePart.getId());
 
         holder.partName.setOnClickListener(view -> mItemClickListener.onItemClick(position, filePart));
+        if(filePart.isAvailable())
+            holder.tick.setImageResource(R.mipmap.round_check_circle_green_48px);
         holder.tick.setOnClickListener(view -> mItemClickListener.onItemClick(position, filePart));
         holder.layout1.setOnClickListener(view -> mItemClickListener.onItemClick(position, filePart));
         holder.layout2.setOnClickListener(view -> mItemClickListener.onItemClick(position, filePart));
